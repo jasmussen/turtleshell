@@ -1,0 +1,254 @@
+/**
+ * Personal Heuristics for Growth
+ */
+
+html, body { font: 16px/1.5 "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; } figure { margin: 0; } img { max-width: 100%; height: auto; } * { box-sizing: border-box; }
+
+body,
+#root {
+	margin: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+
+/* This is for screen readers */
+h1 {
+	display: none;
+}
+
+/* Navigation */
+.heuristics__navigation {
+	position: absolute;
+	bottom: 18px;
+	left: 18px;
+	right: 18px;
+	display: flex;
+	flex-wrap: wrap;
+	z-index: 1;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	mix-blend-mode: difference;
+	will-change: transform;
+
+	li {
+		display: block;
+		position: relative;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		overflow: hidden;
+		text-indent: 100%;
+		color: white;
+		text-decoration: none;
+
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	// Focus and active.
+	a:focus {
+		outline: none;
+	}
+
+	a:focus::before {
+		content: "";
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		bottom: 2px;
+		left: 2px;
+		border-radius: 50%;
+		box-shadow: inset 0 0 0 2px white;
+	}
+
+	.is-active::before {
+		content: "";
+		position: absolute;
+		top: 6px;
+		right: 6px;
+		bottom: 6px;
+		left: 6px;
+		border-radius: 50%;
+		box-shadow: inset 0 0 0 2px white;
+	}
+
+	// Dot.
+	.is-home a::before,
+	a::after {
+		content: "";
+		display: block;
+		border-radius: 50%;
+		background: white;
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		top: 14px;
+		left: 14px;
+	}
+
+	// Home dot
+	.is-home a::before,
+	.is-home a::after {
+		border-radius: 0;
+		height: 5px;
+		top: 17px;
+	}
+
+	.is-home a::before {
+		border-bottom: 4px solid white;
+		border-left: 4px solid transparent;
+		border-right: 4px solid transparent;
+		width: 0;
+		height: 0;
+		background: none;
+		top: 13px;
+	}
+}
+
+/* Heuristic */
+.heuristic__primary,
+.heuristic__clone {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transition: all 1s ease;
+	will-change: transform;
+
+	// Perspective
+	perspective: 20px;
+
+	/* Illustrations */
+	span {
+		display: block;
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		transition: all 1s ease;
+		will-change: transform;
+
+		// These will be overridden by random variables
+		background-color: white;
+	}
+}
+
+/* Heuristic Quote */
+.heuristic__quote {
+	position: absolute;
+	display: inline-block;
+	border-radius: 4px;
+	z-index: 1;
+	max-height: 100%;
+	overflow: auto;	
+	will-change: transform;
+	padding: 0 18px;
+	mix-blend-mode: luminosity;
+	color: white;
+
+	a {
+		color: white;
+	}
+
+	transition: all 1s ease;
+	left: 24px;
+	right: 24px;
+	top: 120px;
+
+	&::after {
+		content: "";
+		display: block;
+		background: rgba(0,0,0,0.7);
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		will-change: transform;
+	}
+}
+
+@media only screen and ( min-width: 480px ) {
+	.heuristic__quote {
+		top: 20%;
+		right: auto;
+		max-width: 312px;
+	}
+}
+
+h2 {
+	margin: 0;
+	position: absolute;
+	color: white;
+	mix-blend-mode: difference;
+	z-index: 1;
+	top: 36px;
+	left: 24px;
+	font-size: 48px;
+}
+
+
+/* Mirroring */
+.heuristic {
+	position: relative;
+	height: 120%; // This pushes things down a bit.
+}
+
+.heuristic__primary {
+	height: 50%;
+	overflow: hidden;
+}
+
+.heuristic__clone {
+	top: 50%;
+	height: 50%;
+	overflow: hidden;
+	transform: scaleY( -1 );
+	filter: brightness( 1.1 );
+}
+
+
+/**
+ * Mounts
+ */
+
+.heuristic {
+	svg {
+		// Temp
+		display: none;
+
+		will-change: transform;
+		position: absolute;
+		transform: translate(-50%, -50%);
+
+		// This will be overridden.
+		top: 50%;
+		left: 80%;
+
+		mix-blend-mode: difference;
+	}
+
+	svg g {
+		transition: all 1s ease;
+	}
+}
+
+
+/**
+ * Typography
+ */
+
+blockquote,
+p {
+	margin: 1em 0;
+}
