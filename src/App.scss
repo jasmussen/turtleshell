@@ -1,0 +1,335 @@
+/**
+ * Personal Heuristics for Growth
+ */
+
+html, body { font: 16px/1.5 "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; } figure { margin: 0; } img { max-width: 100%; height: auto; } * { box-sizing: border-box; }
+
+body,
+#root {
+	margin: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+/* This is for screen readers */
+h1 {
+	display: none;
+}
+
+/* Navigation */
+.heuristics__navigation {
+	position: absolute;
+	z-index: 1;
+	bottom: 72px;
+	left: 18px;
+	right: 18px;
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	will-change: transform;
+
+	// Color against the background.
+	mix-blend-mode: difference;
+
+	li {
+		// Hide most of these on mobile.
+		display: none;
+		@media only screen and ( min-width: 480px ) {
+			display: block;
+		}
+
+		position: relative;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		overflow: hidden;
+		text-indent: 100%;
+		line-height: 600%;
+		color: white;
+		text-decoration: none;
+
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	li.is-home {
+		display: block;
+	}
+
+	// Focus and active.
+	a:focus {
+		outline: none;
+	}
+
+	a:focus::before {
+		content: "";
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		bottom: 2px;
+		left: 2px;
+		border-radius: 50%;
+		box-shadow: inset 0 0 0 2px white;
+	}
+
+	.is-active::before {
+		content: "";
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		bottom: 8px;
+		left: 8px;
+		border-radius: 50%;
+		box-shadow: inset 0 0 0 2px white;
+	}
+
+	// Dot.
+	.is-home a::before,
+	a::after {
+		content: "";
+		display: block;
+		border-radius: 50%;
+		background: white;
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		top: 14px;
+		left: 14px;
+	}
+
+	// Home dot.
+	.is-home a::before,
+	.is-home a::after {
+		border-radius: 0;
+		height: 5px;
+		top: 17px;
+	}
+
+	.is-home a::before {
+		border-bottom: 4px solid white;
+		border-left: 4px solid transparent;
+		border-right: 4px solid transparent;
+		width: 0;
+		height: 0;
+		background: none;
+		top: 13px;
+	}
+}
+
+// Next/prev.
+.heuristics__navigation-next-prev {
+	position: absolute;
+	z-index: 1;
+	bottom: 36px;
+	left: 18px;
+	height: 36px;
+	width: 72px;
+	background: white;
+	display: flex;
+	text-indent: 0;
+	transition: all 1s ease;
+	border-radius: 4px;
+	border-radius: 18px;
+
+	a {
+		width: 36px;
+		padding: 6px;
+		overflow: hidden;
+		color: currentColor;
+		position: relative;
+	}
+
+	svg {
+		fill: currentColor;
+	}
+
+	a:focus {
+		outline: 2px solid transparent; // For High Contrast mode.
+	}
+
+	a:focus::before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		bottom: 4px;
+		left: 4px;
+		border-radius: 50%; // 2px better?
+		box-shadow: inset 0 0 0 2px currentColor;
+	}
+}
+
+/* Heuristic */
+.heuristic__primary,
+.heuristic__clone {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transition: all 1s ease;
+	will-change: transform;
+
+	// Perspective
+	perspective: 20px;
+
+	/* Illustrations */
+	span {
+		display: block;
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		transition: all 1s ease;
+		will-change: transform;
+
+		// These will be overridden by random variables
+		background-color: white;
+	}
+}
+
+/* Heuristic Quote */
+.heuristic__quote {
+	position: absolute;
+	display: inline-block;
+	border-radius: 4px;
+	z-index: 1;
+	max-height: 100%;
+	overflow: auto;	
+	will-change: transform;
+	padding: 0 18px;
+	color: white;
+
+	a {
+		color: currentColor;
+	}
+
+	transition: all 1s ease;
+	left: 18px;
+	right: 90px;
+	top: 120px;
+}
+
+@media only screen and ( min-width: 480px ) {
+	.heuristic__quote {
+		top: 20%;
+		right: auto;
+		max-width: 336px;
+	}
+}
+
+h2 {
+	margin: 0;
+	position: absolute;
+	color: white;
+	mix-blend-mode: difference;
+	z-index: 1;
+	top: 36px;
+	left: 24px;
+	font-size: 48px;
+}
+
+
+/* Mirroring */
+.heuristic {
+	position: relative;
+	height: 120%; // This pushes things down a bit.
+}
+
+.heuristic__primary {
+	height: 50%;
+	overflow: hidden;
+}
+
+.heuristic__clone {
+	top: 50%;
+	height: 50%;
+	overflow: hidden;
+	transform: scaleY( -1 );
+	filter: brightness( 1.1 );
+}
+
+
+/**
+ * Mountains
+ */
+
+// These are the columns that will contain the trajectory of each mountain.
+.m,
+.m__clone {
+	position: absolute;
+	width: 100px;
+	overflow: hidden; // This crops the mountain inside, when it's under the waterline.
+	height: 53%;
+
+	// This should be customized on a per mountain basis.
+	z-index: 2;
+	left: 72%;
+
+	// This is the individual mountain that moves inside the column.
+	.m__group {
+		will-change: transform;
+		position: absolute;
+		transition: all 1s ease;
+	
+		// This "soft"-crops the underside of the mountain.
+		width: 100px;
+		height: 100px;
+
+		// Starting position.
+		bottom: 0;
+
+		path,
+		polygon {
+			transition: all 1s ease;
+		}
+	}
+
+	svg {
+		position: absolute;
+	}
+
+	.m__group-bg {
+		filter: brightness(0.9);
+	}
+	
+	.m__group-fg {
+		filter: saturate(2);
+	}
+}
+
+.m__clone {
+	// This should be overridden.
+	// Should be same as the height of the original.
+	top: 53%;
+
+	// Lighten and vertically mirror.
+	transform: scaleY( -1 );
+	filter: brightness( 1.3 );
+	opacity: 0.4;
+}
+
+
+/**
+ * Typography
+ */
+
+blockquote,
+p {
+	margin: 1em 0;
+}
+
+cite {
+	display: block;
+	margin-top: 1em;
+	font-style: normal;
+}
