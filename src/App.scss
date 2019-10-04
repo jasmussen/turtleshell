@@ -15,7 +15,6 @@ body,
 	overflow: hidden;
 }
 
-
 /* This is for screen readers */
 h1 {
 	display: none;
@@ -33,8 +32,10 @@ h1 {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	mix-blend-mode: difference;
 	will-change: transform;
+
+	// Color against the background.
+	mix-blend-mode: difference;
 
 	li {
 		display: block;
@@ -95,7 +96,7 @@ h1 {
 		left: 14px;
 	}
 
-	// Home dot
+	// Home dot.
 	.is-home a::before,
 	.is-home a::after {
 		border-radius: 0;
@@ -152,30 +153,16 @@ h1 {
 	overflow: auto;	
 	will-change: transform;
 	padding: 0 18px;
-	mix-blend-mode: luminosity;
 	color: white;
 
 	a {
-		color: white;
+		color: currentColor;
 	}
 
 	transition: all 1s ease;
 	left: 24px;
 	right: 24px;
 	top: 120px;
-
-	&::after {
-		content: "";
-		display: block;
-		background: rgba(0,0,0,0.7);
-		position: absolute;
-		z-index: -1;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		will-change: transform;
-	}
 }
 
 @media only screen and ( min-width: 480px ) {
@@ -224,22 +211,22 @@ h2 {
 
 .heuristic {
 	svg {
-		// Temp
-		display: none;
-
 		will-change: transform;
 		position: absolute;
 		transform: translate(-50%, -50%);
+		transition: all 1s ease;
 
 		// This will be overridden.
 		top: 50%;
 		left: 80%;
-
-		mix-blend-mode: difference;
 	}
 
-	svg g {
-		transition: all 1s ease;
+	.m__bg {
+		filter: brightness(0.9);
+	}
+
+	.m__fg {
+		filter: saturate(2);
 	}
 }
 

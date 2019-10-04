@@ -14,14 +14,17 @@ import './App.scss';
 // The color scheme is chosen by the number, looping. I.e. the scheme is not random.
 // But the order and which colors inside are then used randomly by elements.
 // Note: If there are too few colors in the array, it is likely the same color may get chosen.
+// For contrast, works best when very bright or dark colors are chosen.
 const colorSchemes = [
-	[ '#ff9f60', '#fff923', '#ff9a03', '#4a3800', '#9afdff' ],
-	[ '#1115ff', '#1294ff', '#11ffd0', '#fffab9', '#008ec4' ],
-	[ '#ff6be5', '#b777ff', '#ff15f5', '#6a26ff', '#53a4ff' ],
-	[ '#00e085', '#30f700', '#04ff54', '#acf900', '#009df8' ],
-	[ '#470064', '#001559', '#1e003f', '#1900e1', '#ecffc7' ],
-	[ '#d0cfd0', '#a6a6a7', '#4c4c4b', '#a72400', '#7661ff' ],
-	[ '#060605', '#171717', '#5c5d5c', '#dfdfdf', '#1a7bff' ],
+	// First array are dark colors.
+	// Second array are light colors.
+	// Third array are random colors.
+	[ [ '#aa3f00' ], [ '#faffc4' ], [ '#aa3f00', '#eb9b00', '#83006f', '#b30074', '#ffd32a' ], ],
+	[ [ '#2d7a00' ], [ '#efffc2' ], [ '#389c00', '#a8ab00', '#da4800', '#ffbc07', '#e3ff94' ], ],
+	[ [ '#ff9f60' ], [ '#00113c' ], [ '#ff9f60', '#fff923', '#ff9a03', '#4a3800', '#9afdff' ], ],
+	[ [ '#1115ff' ], [ '#fffab9' ], [ '#1115ff', '#1294ff', '#11ffd0', '#fffab9', '#008ec4' ], ],
+	[ [ '#6a26ff' ], [ '#bcfffe' ], [ '#ff6be5', '#b777ff', '#ff15f5', '#6a26ff', '#53a4ff' ], ],
+	[ [ '#470064' ], [ '#ecffc7' ], [ '#470064', '#001559', '#1e003f', '#1900e1', '#ecffc7' ], ],
 ]
 
 const intro = (
@@ -77,7 +80,10 @@ function seed( number ) {
 	return seed;
 }
 
-function getRandomColor( i, scheme ) {
+function getRandomColor( seedNumber, scheme ) {
+	// seedNumber is the number to be randomized.
+	// scheme is the scheme from the array of color arrays to use.
+
 	// Note to self: by picking a number between 0 and 1 as the seed, multiplying by the array length,
 	// it means you'll always pick a number in the array.
 
@@ -86,10 +92,20 @@ function getRandomColor( i, scheme ) {
 	// This makes it cycle through the available color arrays, one after the other, and cycle when the array ends.
 	let colorScheme = scheme % colorSchemes.length;
 
-	// Random color from that scheme.
-	let colorFromScheme = Math.floor( seed( i ) * colorSchemes[ colorScheme ].length );
+	// Store random color from that scheme.
+	let colorFromScheme = Math.floor( seed( seedNumber ) * colorSchemes[ colorScheme ][2].length );
 
-	return colorSchemes[ colorScheme ][ colorFromScheme ];
+	return colorSchemes[ colorScheme ][2][ colorFromScheme ];
+}
+
+function getDarkColor( scheme ) {
+	let colorScheme = scheme % colorSchemes.length;
+	return colorSchemes[ colorScheme ][0][0];
+}
+
+function getLightColor( scheme ) {
+	let colorScheme = scheme % colorSchemes.length;
+	return colorSchemes[ colorScheme ][1][0];
 }
 
 
@@ -164,7 +180,6 @@ class Heuristic extends React.Component {
 		return (
 			<>
 				<h1>A Collection of Personal Heuristics. Snacksized.</h1>
-				<meta name="theme-color" content={{ backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ) }} />
 				<ul className="heuristics__navigation">
 					<li className={ !id ? 'is-active is-home' : 'is-home' } ><Link to="/">Home</Link></li>
 
@@ -176,39 +191,34 @@ class Heuristic extends React.Component {
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<div className="heuristic__quote"
 					style={{
-						backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ),
+						backgroundColor: getDarkColor( currentHeuristic ),
+						color: getLightColor( currentHeuristic ),
 					}}>
 					{ heuristic }
 				</div>
 				<section className="heuristic" onClick={ this.handleClick }>
 					<div className="heuristic__primary"
 						style={{
-							backgroundColor: getRandomColor( currentHeuristic, currentHeuristic),
+							backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ),
 							perspective: perspectiveAlgo + 'px'
 							}}>
 						{ items }
 					</div>
 					<div className="heuristic__clone"
 						style={{
-							backgroundColor: getRandomColor( currentHeuristic, currentHeuristic),
+							backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ),
 							perspective: perspectiveAlgo + 'px'
 							}}>
 						{ items }
 					</div>
-					<svg width="100" height="200" viewBox="0 0 100 200">
-						<g style={{
-							fill: getRandomColor( seed( currentHeuristic + 6 ), currentHeuristic),
-						}}>
-							<path className="m__b1" d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
-							<path className="m__b2" opacity=".4" d="M50 165l5-5 10-10H55l5-5h5v-10H55l5-5h10l10-10H65l5-5h-5l10-10v-5H20l5 5h5l10 10H15v5h35l-5 5H15l5 5h5l5 5h15l5 5H35l10 10v20l10 10v-15h-5zm-5-50v-10h5v5l5 5H45z" />
-						</g>
-						<g style={{
-							fill: getRandomColor( seed( currentHeuristic + 1 ), currentHeuristic),
-						}}>
-							<path className="m__f1" opacity=".8" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
-							<path className="m__f2" opacity=".6" d="M45 50L25 70h10l20-20z" />
-							<path className="m__f3" opacity=".4" d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
-						</g>
+					<svg className="m__bg" style={{ fill: getDarkColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
+						<path d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
+						<path opacity=".4" d="M50 165l5-5 10-10H55l5-5h5v-10H55l5-5h10l10-10H65l5-5h-5l10-10v-5H20l5 5h5l10 10H15v5h35l-5 5H15l5 5h5l5 5h15l5 5H35l10 10v20l10 10v-15h-5zm-5-50v-10h5v5l5 5H45z" />
+					</svg>
+					<svg className="m__fg" style={{ fill: getLightColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
+						<path opacity=".6" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
+						<path opacity=".4" d="M45 50L25 70h10l20-20z" />
+						<path opacity=".2" d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
 					</svg>
 				</section>
 			</>
