@@ -194,14 +194,17 @@ function Sky( { className, currentHeuristic } ) {
 function Mountain( { className, currentHeuristic } ) {
 	return (
 		<div className={ className }>
-			<svg className="m__bg" style={{ fill: getDarkColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
-				<path d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
-			</svg>
-			<svg className="m__fg" style={{ fill: getLightColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
-				<path opacity=".6" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
-				<path opacity=".4" d="M45 50L25 70h10l20-20z" />
-				<path opacity=".2" d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
-			</svg>
+			<div className="m__group" style={{ bottom: 60 * seed( currentHeuristic ) + "%" }}>
+				<svg className="m__group-bg" style={{ fill: getDarkColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
+					<path d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
+					<polygon class="st1" points="55,145 70,130 70,120 80,110 80,105 75,100 20,100 15,105 30,120 30,130 40,140 40,175 50,165 50,155 55,150 "/>
+				</svg>
+				<svg className="m__group-fg" style={{ fill: getLightColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
+					<path opacity=".6" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
+					<path opacity=".4" d="M45 50L25 70h10l20-20z" />
+					<path opacity=".2" d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
+				</svg>
+			</div>
 		</div>
 	);
 }

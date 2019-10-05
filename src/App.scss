@@ -206,34 +206,54 @@ h2 {
 
 
 /**
- * Mounts
+ * Mountains
  */
 
+// These are the columns that will contain the trajectory of each mountain.
 .m,
 .m__clone {
-	will-change: transform;
 	position: absolute;
-	transition: all 1s ease;
+	width: 100px;
+	overflow: hidden; // This crops the mountain inside, when it's under the waterline.
 
-	// This will be overridden.
-	top: 50%;
-	left: 80%;
+	// This should be overridden.
+	left: 70%;
+	height: 50%;
+
+	// This is the individual mountain that moves inside the column.
+	.m__group {
+		will-change: transform;
+		position: absolute;
+		transition: all 1s ease;
+	
+		// This "soft"-crops the underside of the mountain.
+		width: 100px;
+		height: 100px;
+
+		// Starting position.
+		bottom: 0;
+	}
 
 	svg {
 		position: absolute;
 	}
 
-	.m__bg {
+	.m__group-bg {
 		filter: brightness(0.9);
 	}
 	
-	.m__fg {
+	.m__group-fg {
 		filter: saturate(2);
 	}
 }
 
 .m__clone {
-	transform: translateY(200px) scaleY( -1 );
+	// This should be overridden.
+	// Should be same as the height of the original.
+	top: 50%;
+
+	// Lighten and vertically mirror.
+	transform: scaleY( -1 );
 	filter: brightness( 1.3 );
 	opacity: 0.4;
 }
