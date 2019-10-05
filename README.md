@@ -2,7 +2,13 @@
 
 This is a collection of personal learnings, collected in a generative art piece progressive web-app built in React.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![screenshot](screenshot.png)
+
+This is free software, and is released under the terms of the GPL version 2 or (at your option) any later version. See [LICENSE.md](LICENSE.md).
+
+Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
 
 ## Available Scripts
 
