@@ -209,25 +209,33 @@ h2 {
  * Mounts
  */
 
-.heuristic {
-	svg {
-		will-change: transform;
-		position: absolute;
-		transform: translate(-50%, -50%);
-		transition: all 1s ease;
+.m,
+.m__clone {
+	will-change: transform;
+	position: absolute;
+	transition: all 1s ease;
 
-		// This will be overridden.
-		top: 50%;
-		left: 80%;
+	// This will be overridden.
+	top: 50%;
+	left: 80%;
+
+	svg {
+		position: absolute;
 	}
 
 	.m__bg {
 		filter: brightness(0.9);
 	}
-
+	
 	.m__fg {
 		filter: saturate(2);
 	}
+}
+
+.m__clone {
+	transform: translateY(200px) scaleY( -1 );
+	filter: brightness( 1.3 );
+	opacity: 0.4;
 }
 
 

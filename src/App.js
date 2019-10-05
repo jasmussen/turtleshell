@@ -110,10 +110,108 @@ function getLightColor( scheme ) {
 
 
 /**
+ * Navigation
+ */
+
+function Navigation( { id } ) {
+	return (
+		<ul className="heuristics__navigation">
+			<li className={ !id ? 'is-active is-home' : 'is-home' } ><Link to="/">Home</Link></li>
+
+			{heuristics.map((value, index) => {
+				let i = parseInt(index) + 1;
+				return <li className={ id === i ? 'is-active' : '' } key={index}><Link to={"/" + i}>{i}</Link></li>
+			})}
+		</ul>
+	);
+}
+
+
+/**
+ * Heuristic Quote
+ */
+
+function Quote( { currentHeuristic, heuristic } ) {
+	return (
+		<div className="heuristic__quote"
+			style={{
+				backgroundColor: getDarkColor( currentHeuristic ),
+				color: getLightColor( currentHeuristic ),
+			}}>
+			{ heuristic }
+		</div>
+	);
+}
+
+
+/**
+ * Sky
+ */
+
+function Sky( { className, currentHeuristic } ) {
+	// Output elements to transform.
+	let items = [];
+	let numItems = 10;
+	let scaleMultiplier = 6;
+	for (var i = 1; i <= numItems; i++) {
+		let s1 = seed( seed( currentHeuristic ) * i );
+		let s2 = seed( seed( currentHeuristic ) * i + 1 );
+		let s3 = seed( seed( currentHeuristic ) * i + 2 );
+		let s4 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 10 );
+		items.push(
+			<span key={ i } style={{
+				backgroundColor: getRandomColor( i + 1 * currentHeuristic, currentHeuristic),
+				left: ( 100 / numItems ) * i + "%",
+				top: 100 * s1 + "%",
+				transform: 
+					'translate(-50%, -50%)'
+					+ 'translateZ(' + s4 + 'px)'
+					+ 'rotate(' + s2 * 360 + 'deg)'
+					+ 'scale(' + s3 * scaleMultiplier + ')',
+				opacity: s1,
+			}} />
+		);
+	}
+
+	let perspectiveAlgo = Math.round( seed( currentHeuristic ) * 5 + 20 );
+
+	return (
+		<div className={ className }
+			style={{
+				backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ),
+				perspective: perspectiveAlgo + 'px'
+				}}>
+			{ items }
+		</div>
+	);
+}
+
+
+/**
+ * Mountain
+ */
+
+function Mountain( { className, currentHeuristic } ) {
+	return (
+		<div className={ className }>
+			<svg className="m__bg" style={{ fill: getDarkColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
+				<path d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
+			</svg>
+			<svg className="m__fg" style={{ fill: getLightColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
+				<path opacity=".6" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
+				<path opacity=".4" d="M45 50L25 70h10l20-20z" />
+				<path opacity=".2" d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
+			</svg>
+		</div>
+	);
+}
+
+
+/**
  * Output the Heuristic based on the URL
  */
 
-class Heuristic extends React.Component {
+class HeuristicScene extends React.Component {
 	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
@@ -149,77 +247,19 @@ class Heuristic extends React.Component {
 			heuristic = heuristics[currentHeuristic - 1];
 		}
 
-		// Output elements to transform.
-		let items = [];
-		let numItems = 10;
-		let perspectiveAlgo = Math.round( seed( currentHeuristic ) * 5 + 20 );
-		let scaleMultiplier = 6;
-		for (var i = 1; i <= numItems; i++) {
-			let s1 = seed( seed( currentHeuristic ) * i );
-			let s2 = seed( seed( currentHeuristic ) * i + 1 );
-			let s3 = seed( seed( currentHeuristic ) * i + 2 );
-			let s4 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 10 );
-			//let s5 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 5 );
-			items.push(
-				<span key={ i } style={{
-					backgroundColor: getRandomColor( i + 1 * currentHeuristic, currentHeuristic),
-					left: ( 100 / numItems ) * i + "%",
-					top: 100 * s1 + "%",
-					transform: 
-						'translate(-50%, -50%)'
-						+ 'translateZ(' + s4 + 'px)'
-						+ 'rotate(' + s2 * 360 + 'deg)'
-						+ 'scale(' + s3 * scaleMultiplier + ')',
-					opacity: s1,
-					//filter: 'blur(' + s5 + 'px)', // Blur, good idea, needs the right context.
-				}} />
-			);
-		}
-
 		// Render.
 		return (
 			<>
 				<h1>A Collection of Personal Heuristics. Snacksized.</h1>
-				<ul className="heuristics__navigation">
-					<li className={ !id ? 'is-active is-home' : 'is-home' } ><Link to="/">Home</Link></li>
-
-					{heuristics.map((value, index) => {
-						let i = parseInt(index) + 1;
-						return <li className={ id === i ? 'is-active' : '' } key={index}><Link to={"/" + i}>{i}</Link></li>
-					})}
-				</ul>
+				<Navigation id={ id } />
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
-				<div className="heuristic__quote"
-					style={{
-						backgroundColor: getDarkColor( currentHeuristic ),
-						color: getLightColor( currentHeuristic ),
-					}}>
-					{ heuristic }
-				</div>
+				<Quote currentHeuristic={ currentHeuristic } heuristic={ heuristic } />
+
 				<section className="heuristic" onClick={ this.handleClick }>
-					<div className="heuristic__primary"
-						style={{
-							backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ),
-							perspective: perspectiveAlgo + 'px'
-							}}>
-						{ items }
-					</div>
-					<div className="heuristic__clone"
-						style={{
-							backgroundColor: getRandomColor( currentHeuristic, currentHeuristic ),
-							perspective: perspectiveAlgo + 'px'
-							}}>
-						{ items }
-					</div>
-					<svg className="m__bg" style={{ fill: getDarkColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
-						<path d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
-						<path opacity=".4" d="M50 165l5-5 10-10H55l5-5h5v-10H55l5-5h10l10-10H65l5-5h-5l10-10v-5H20l5 5h5l10 10H15v5h35l-5 5H15l5 5h5l5 5h15l5 5H35l10 10v20l10 10v-15h-5zm-5-50v-10h5v5l5 5H45z" />
-					</svg>
-					<svg className="m__fg" style={{ fill: getLightColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
-						<path opacity=".6" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
-						<path opacity=".4" d="M45 50L25 70h10l20-20z" />
-						<path opacity=".2" d="M25 85h10V70H25v15zm30-35v25h10V50H55z" />
-					</svg>
+					<Sky className="heuristic__primary" currentHeuristic={ currentHeuristic } />
+					<Sky className="heuristic__clone" currentHeuristic={ currentHeuristic } />
+					<Mountain className="m" currentHeuristic={ currentHeuristic } />
+					<Mountain className="m__clone" currentHeuristic={ currentHeuristic } />
 				</section>
 			</>
 		);
@@ -249,8 +289,8 @@ class App extends React.Component {
 					component={this.ComponentWithRegex}
 				/>
 				<Switch>
-					<Route exact path="/:id" component={Heuristic} />
-					<Route exact path="" component={Heuristic} />
+					<Route exact path="/:id" component={HeuristicScene} />
+					<Route exact path="" component={HeuristicScene} />
 				</Switch>
 			</Router>
 		)
