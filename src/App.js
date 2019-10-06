@@ -30,7 +30,7 @@ const colorSchemes = [
 const intro = (
 	<>
 		<p><strong>heuristic</strong>, <em>adj.</em>: enabling a person to discover or learn something for themselves.</p>
-		<p>This website is an <a href="https://github.com/jasmussen/turtleshell">open source</a> collection of personal heuristics I've learned over the years.</p>
+		<p>This website is an <a href="https://github.com/jasmussen/turtleshell">open source</a> collection of personal heuristic learnings I've collected over the years.</p>
 		<p>Hopefully they can shield you as they have me. Be mindful, though: no advice applies universally.</p>
 		<p>— <a href="http://moc.co">Joen, October 2019</a></p>
 	</>
@@ -113,16 +113,41 @@ function getLightColor( scheme ) {
  * Navigation
  */
 
-function Navigation( { id } ) {
-	return (
-		<ul className="heuristics__navigation">
-			<li className={ !id ? 'is-active is-home' : 'is-home' } ><Link to="/">Home</Link></li>
+function Navigation( { currentHeuristic, id } ) {
 
-			{heuristics.map((value, index) => {
-				let i = parseInt(index) + 1;
-				return <li className={ id === i ? 'is-active' : '' } key={index}><Link to={"/" + i}>{i}</Link></li>
-			})}
-		</ul>
+	let current = parseInt( id );
+	let next = current + 1;
+	let prev = current - 1;
+
+	if ( !current ) {
+		prev = "";
+		next = 1;
+	}
+	if ( current === 1 ) {
+		prev = "";
+	}
+	if ( current === heuristics.length ) {
+		next = "";
+	}
+
+	return (
+		<>
+			<ul className="heuristics__navigation">
+				<li className={ !id ? 'is-active is-home' : 'is-home' } ><Link to="/">Home</Link></li>
+				{heuristics.map((value, index) => {
+					let i = parseInt(index) + 1;
+					return <li className={ id === i ? 'is-active' : '' } key={index}><Link to={"/" + i}>{i}</Link></li>
+				})}
+			</ul>
+			<div className="heuristics__navigation-next-prev"
+				style={{
+					backgroundColor: getDarkColor( currentHeuristic ),
+					color: getLightColor( currentHeuristic ),
+				}}>
+				<Link to={"/" + prev}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 20l-8-8 8-8 1.414 1.414L8.828 12l6.586 6.586"/></svg> Previous</Link>
+				<Link to={"/" + next}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20l8-8-8-8-1.414 1.414L15.172 12l-6.586 6.586"/></svg> Next</Link>
+			</div>
+		</>
 	);
 }
 
@@ -197,7 +222,7 @@ function Mountain( { className, currentHeuristic } ) {
 			<div className="m__group" style={{ bottom: 60 * seed( currentHeuristic ) + "%" }}>
 				<svg className="m__group-bg" style={{ fill: getDarkColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
 					<path d="M85 85L75 75 65 65V50L55 40V20L45 30v20L35 60 25 70h-5l-5 5v10h25L30 95h-5l-5 5h55v-5L65 85h20zm-35 5v5h-5V85h10l-5 5z" />
-					<polygon class="st1" points="55,145 70,130 70,120 80,110 80,105 75,100 20,100 15,105 30,120 30,130 40,140 40,175 50,165 50,155 55,150 "/>
+					<polygon points="55,145 70,130 70,120 80,110 80,105 75,100 20,100 15,105 30,120 30,130 40,140 40,175 50,165 50,155 55,150 " />
 				</svg>
 				<svg className="m__group-fg" style={{ fill: getLightColor( currentHeuristic ) }} width="100" height="200" viewBox="0 0 100 200">
 					<path opacity=".6" d="M65 50L55 40H45l10 10h10zm10 25H55l10 10h20L75 75z" />
@@ -254,7 +279,7 @@ class HeuristicScene extends React.Component {
 		return (
 			<>
 				<h1>A Collection of Personal Heuristics. Snacksized.</h1>
-				<Navigation id={ id } />
+				<Navigation id={ id } currentHeuristic={ currentHeuristic } />
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } heuristic={ heuristic } />
 
