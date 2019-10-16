@@ -268,6 +268,7 @@ h2 {
 	position: absolute;
 	width: 100px;
 	overflow: hidden; // This crops the mountain inside, when it's under the waterline.
+	height: 53%;
 
 	// This should be customized on a per mountain basis.
 	z-index: 2;
@@ -305,15 +306,10 @@ h2 {
 	}
 }
 
-.m {
-	height: 53%;
-}
-
 .m__clone {
 	// This should be overridden.
 	// Should be same as the height of the original.
 	top: 53%;
-	height: 47%;
 
 	// Lighten and vertically mirror.
 	transform: scaleY( -1 );
