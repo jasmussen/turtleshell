@@ -272,7 +272,6 @@ h2 {
 	// This should be customized on a per mountain basis.
 	z-index: 2;
 	left: 72%;
-	height: 50%;
 
 	// This is the individual mountain that moves inside the column.
 	.m__group {
@@ -286,6 +285,11 @@ h2 {
 
 		// Starting position.
 		bottom: 0;
+
+		path,
+		polygon {
+			transition: all 1s ease;
+		}
 	}
 
 	svg {
@@ -301,10 +305,15 @@ h2 {
 	}
 }
 
+.m {
+	height: 53%;
+}
+
 .m__clone {
 	// This should be overridden.
 	// Should be same as the height of the original.
-	top: 50%;
+	top: 53%;
+	height: 47%;
 
 	// Lighten and vertically mirror.
 	transform: scaleY( -1 );
