@@ -29,10 +29,10 @@ const colorSchemes = [
 
 const intro = (
 	<>
-		<p><strong>heuristic</strong>, <em>adj.</em>: enabling a person to discover or learn something for themselves.</p>
-		<p>This website is an <a href="https://github.com/jasmussen/turtleshell">open source</a> collection of personal heuristic learnings I've collected over the years.</p>
-		<p>Hopefully they can shield you as they have me. Be mindful, though: no advice applies universally.</p>
-		<p>— <a href="http://moc.co">Joen, October 2019</a></p>
+		<p>This is an <a href="https://github.com/jasmussen/turtleshell">open source</a> collection of personal learnings and principles I've collected over the years.</p>
+		<p>They are shared here in the hope that they might serve as basic heuristics enabling others to create their own set of principles.</p>
+		<p>Be mindful: no advice applies universally.</p>
+		<p>— <a href="http://moc.co">Joen</a>, October 2019</p>
 	</>
 );
 
@@ -120,7 +120,7 @@ function Navigation( { currentHeuristic, id } ) {
 	let prev = current - 1;
 
 	if ( !current ) {
-		prev = "";
+		prev = heuristics.length;
 		next = 1;
 	}
 	if ( current === 1 ) {
@@ -278,7 +278,7 @@ class HeuristicScene extends React.Component {
 		// Render.
 		return (
 			<>
-				<h1>A Collection of Personal Heuristics. Snacksized.</h1>
+				<h1>Snacksized Personal Learnings, Served on a Turtleshell.</h1>
 				<Navigation id={ id } currentHeuristic={ currentHeuristic } />
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } heuristic={ heuristic } />
