@@ -65,7 +65,9 @@ const heuristics = [
 	<p>Automate. Almost no task is too small to automate, you'll be surprised how much time it'll save you in the long term.</p>,
 	<p>If your feedback is worth sharing, it's worth more than 2 cents.</p>,
 	<p>You don't have to have an opinion on everything. And you don't even have to have a strong opinion when you do have one. You can't know or do everything, which is why it's so fortunate that you can work with people who complete you. If you let them.</p>,
-	<p>Leadership does not require a title.</p>,
+	<p>Small acts of leadership do not require a title.</p>,
+	<p>Don't start by building the tool. Start by imagining what the tool has to accomplish, then work your way there. Like any good mystery novel, start with the ending.</p>,
+	<p>For every problem you fix, one less problem remains. Remember that on projects that seem overwhelming. If you're walking through hell, as someone said, keep walking.</p>,
 ]
 
 
