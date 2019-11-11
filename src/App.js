@@ -29,15 +29,18 @@ const colorSchemes = [
 
 const intro = (
 	<>
-		<p>This is an <a href="https://github.com/jasmussen/turtleshell">open source</a> collection of personal learnings and principles I've collected over the years.</p>
-		<p>They are shared here in the hope that they might serve as basic heuristics enabling others to create their own set of principles.</p>
-		<p>Be mindful: no advice applies universally.</p>
+		<p><strong>Hello!</strong> This is where I collect personal learnings, or traits I aspire to absorb.</p>
+		<p>They are shared publicly (and <a href="https://github.com/jasmussen/turtleshell">open source</a>) so that they might help or inspire others to create their own set of principles.</p>
+		<p>No advice applies universally, so take what works and leave the rest!</p>
 		<p>— <a href="http://moc.co">Joen</a>, October 2019</p>
 	</>
 );
 
 const heuristics = [
-	<blockquote>If you want to count the stars in the sky, just start counting.<br />— Selma, age 6</blockquote>,
+	<blockquote>
+		<p>If you want to count the stars in the sky, just start counting.</p>
+		<cite>— Selma, age 6</cite>
+	</blockquote>,
 	<p>Be careful to not get caught up chasing someone else's dream. It's probably a distraction from what really gets you up in the morning.</p>,
 	<p>You can do amazing things. Just not all at once. But don't let this discourage you from accomplishing what's under your control. </p>,
 	<p>Good design has gravity. The more you work on it, the more gravity it gets. At some point, the pieces start falling into place on their own.</p>,
@@ -45,29 +48,69 @@ const heuristics = [
 	<p>When working on difficult designs, it's important to believe that answers are out there, that finding them is a matter of time and effort rather than hope and random chance. Keep exploring until the fog lifts, and eventually answers will present themselves.</p>,
 	<p><a href="https://pages.wustl.edu/DC175/incomplete-manifesto-growth">Bruce Mau says</a>: begin anywhere. Depending on the complexity of the project, you might want to start with what is easiest or indeed what is hardest.</p>,
 	<p>Talk alone does not move mountains. You can suggest moving the mountain is a priority. You can suggest that without a clear plan for moving the mountain, the project is never going to get off the ground. All of that may be true and agreed upon. But none of that is actually going to move the mountain. Sometimes you just have to grab a shovel and a wheelbarrow and start working.</p>,
-	<p>Every thing around you is made by someone. Which means it can be made better still. It also means unless you're willing to make it better, it's likely going to stay the way it is.</p>,
-	<p>Ideas are a renewable resource. Spend them as you get them, don't save them for rainy days. Besides, they have a tendency to be brittle when meeting with reality. Ideas are rarely as valuable as you might think.</p>,
+	<p>Every <strong>thing</strong> around you is made by someone. Which means it can be made better still. It also means unless you're willing to make it better, it's likely going to stay the way it is.</p>,
+	<>
+		<p>Ideas are a renewable resource. Spend them as you get them, don't save them for rainy days.</p>
+		<p>Besides, they have a tendency to be brittle when meeting with reality. Ideas are rarely as valuable as you might think.</p>
+	</>,
 	<p>Whitespace has intrinsic value, both in design and in life. As you work to free up space, be mindful that the newly reclaimed land isn't immediately consumed by something else swooping in to fill the void. Radiohead and Marie Kondo both agree: strive to put everything in it's right place.</p>,
-	<p>Sometimes it's good to follow an idea to the end, even if the idea turns out to be a dud. An old friend of mine used to say there's no such thing as wasted work. This is true, because you'll have cauterized that avenue of exploration; you'll know for sure that idea wasn't the one you needed. But it might resurface in the future, in a different form.</p>,
-	<p>If it doesn't work, it's not real. Whatever design you are working on has to meet with reality at some point, and this process is messy, full of compromises, and a crucial step of the process.</p>,
-	<p>There is a great danger in a design process that is purely driven by data. It might feel like data always drives the right work, but data ignores the magic that has to happen in order for truly great solutions to be imagined. </p>,
-	<p>Kirk and Spock were better together. Kirk represented action, Spock brought the other end of the spectrum, strategy. Their dynamic put them square in the middle, perfectly balanced. Either extreme is tempting. But without the strategy, the action is likely to fail. And without action, the the strategy is meaningless.</p>,
+	<>
+		<p>Sometimes it's good to follow an idea to the end, even if the idea turns out to be a dud.</p>
+		<p>An old friend of mine used to say there's no such thing as wasted work. You'll have cauterized that avenue of exploration and know for sure that idea wasn't the one you needed.</p>
+	</>,
+	<>
+		<p>If it doesn't work, it's not real.</p>
+		<p>Whatever design you are working on has to meet with reality at some point, and this process is messy, full of compromises, and a crucial step of the process.</p>
+	</>,
+	<>
+		<p>There is danger in a process that is driven by data alone.</p>
+		<p>It ignores the magic that has to happen in order for truly great solutions to be imagined.</p>
+	</>,
+	<>
+		<p>Kirk and Spock were better together. Kirk brought the action, Spock tempered it with strategy.</p>
+		<p>Their dynamic helped them bridge the spectrum and balance both extremes. Without the strategy, the action will fail, but without action, the strategy is meaningless.</p>
+	</>,
 	<p>When you say yes, say yes deeply.</p>,
-	<p>My grandfather used to say: get a good chair, because you can't always be motivated, and sometimes you have to sit on it until you're done.</p>,
-	<p>In software development, committing code is a great way to progress out of a mire. Often times it's faster to build and test two proposed but conflicting directions, than it is to discuss which one to pursue.</p>,
+	<p>My grandfather used to say:<br /> "Get a good chair, because you can't always be motivated, and sometimes you're going to have to sit on it until you're done."</p>,
+	<>
+		<p>In software development, committing code is a great way to progress out of a mire.</p>
+		<p>Often times it's faster to build and test two proposed but conflicting directions, than it is to discuss which one to pursue.</p>
+	</>,
 	<p>Share knowledge, then there will be more of it, as my grandfather used to say.</p>,
 	<p>No job requires you to be unkind.</p>,
 	<p>Sleep makes everything better, don't underestimate its powers of healing. Get as much of it as you can.</p>,
-	<p>Every day is a chance to start anew. Consider the person you want to be, and if what you see in the mirror today is not where you want to be, it is never too late to start correcting mistakes, making amends, working to live a life you can be proud of.</p>,
-	<p>A career is not a zero sum game. Others can succeed without that impeding your own success. In fact often helping others be successful will help you many times over in the long run.</p>,
-	<p>Consider that whatever shortcomings we perceive about our individual situations often originate from human ideals that change like the seasons. Don't allow them to put you down. </p>,
-	<p>Having principles is important. Being open to changing them in light of new information is even more important. Everything changes, despite our best wishes for things to stay the same. Closing oneself off from revisiting strongly held convictions is just going to make the ongoing change that much more painful.</p>,
-	<p>Automate. Almost no task is too small to automate, you'll be surprised how much time it'll save you in the long term.</p>,
+	<p>Every day is a chance to start anew. Consider the person you want to be, and if what you see in the mirror isn't right, it is <strong>never</strong> too late to make a change.</p>,
+	<>
+		<p>A career shouldn't be a zero sum game.</p>
+		<p>Others can succeed without that impeding your own success. In fact often helping others be successful will help you many times over in the long run.</p>
+	</>,
+	<p>Consider that whatever shortcomings we perceive about our individual situations often originate from human ideals that change like the seasons. So don't allow that to put you down. </p>,
+	<>
+		<p>Having principles is important. Being open to changing them in light of new information is even more important.</p>
+		<p>Everything changes, despite our best wishes for things to stay the same. Closing oneself off from revisiting strongly held convictions is just going to make the ongoing change that much more painful.</p>
+	</>,
+	<p>Almost no task is too small to automate. You'll be surprised how much time it'll save you in the long run.</p>,
 	<p>If your feedback is worth sharing, it's worth more than 2 cents.</p>,
-	<p>You don't have to have an opinion on everything. And you don't even have to have a strong opinion when you do have one. You can't know or do everything, which is why it's so fortunate that you can work with people who complete you. If you let them.</p>,
-	<p>Small acts of leadership do not require a title.</p>,
-	<p>Don't start by building the tool. Start by imagining what the tool has to accomplish, then work your way there. Like any good mystery novel, start with the ending.</p>,
-	<p>For every problem you fix, one less problem remains. Remember that on projects that seem overwhelming. If you're walking through hell, as someone said, keep walking.</p>,
+	<>
+		<p>You don't have to have an opinion on everything.</p>
+		<p>You can't know or do everything, which is why it's so fortunate that you can work with people who complete you. If you let them.</p>
+	</>,
+	<p>Small acts of leadership do not require a title. When the outcome drivers the process, it doesn't matter who makes the right decision.</p>,
+	<p>Don't build the tool until you know what it should accomplish. Like any good mystery novel, start with the ending.</p>,
+	<>
+		<p>For every problem you fix, there's one less problem to fix.</p>
+		<p>Keep walking.</p>
+	</>,
+	<>
+		<p>Comparing yourself to others is self-destructive. The best antidote to this is to set personal goals.</p>
+		<p>Incidentally, don't knock others for having New Year's resolutions. Best case scenario, change happens. Worst case: nothing happens.</p>
+	</>,
+	<>
+		<p>Harry S. Truman said: It is amazing what you can accomplish if you do not care who gets the credit.</p>
+		<p>Ronald Reagan said, most similarly: There is no limit to the amount of good you can do if you don’t care who gets the credit.</p>
+		<p>Despite being on opposing sides of the political spectrum, they agreed on this principle. Which is that actual progress is, by nature, bi-partisan, and it is best made when it is the progress itself that drives the effort.</p>
+	</>,
+	<p>Invest in trees. The long term ROI could be your way of life.</p>,
 ]
 
 
@@ -282,7 +325,7 @@ class HeuristicScene extends React.Component {
 		// Render.
 		return (
 			<>
-				<h1>Snacksized Personal Learnings, Served on a Turtleshell.</h1>
+				<h1>Snacksized Personal Learnings, Served on a Turtle's Shell.</h1>
 				<Navigation id={ id } currentHeuristic={ currentHeuristic } />
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } heuristic={ heuristic } />

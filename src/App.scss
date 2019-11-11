@@ -50,6 +50,7 @@ h1 {
 		border-radius: 50%;
 		overflow: hidden;
 		text-indent: 100%;
+		line-height: 600%;
 		color: white;
 		text-decoration: none;
 
@@ -325,4 +326,10 @@ h2 {
 blockquote,
 p {
 	margin: 1em 0;
+}
+
+cite {
+	display: block;
+	margin-top: 1em;
+	font-style: normal;
 }
