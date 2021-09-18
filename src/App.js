@@ -19,12 +19,18 @@ const colorSchemes = [
 	// First array are dark colors.
 	// Second array are light colors.
 	// Third array are random colors.
-	[ [ '#aa3f00' ], [ '#faffc4' ], [ '#aa3f00', '#eb9b00', '#83006f', '#b30074', '#ffd32a' ], ],
+
+	// 2019-2021 colors:
+	/*[ [ '#aa3f00' ], [ '#faffc4' ], [ '#aa3f00', '#eb9b00', '#83006f', '#b30074', '#ffd32a' ], ],
 	[ [ '#2d7a00' ], [ '#efffc2' ], [ '#389c00', '#a8ab00', '#da4800', '#ffbc07', '#e3ff94' ], ],
 	[ [ '#ff9f60' ], [ '#00113c' ], [ '#ff9f60', '#fff923', '#ff9a03', '#4a3800', '#9afdff' ], ],
 	[ [ '#1115ff' ], [ '#fffab9' ], [ '#1115ff', '#1294ff', '#11ffd0', '#fffab9', '#008ec4' ], ],
 	[ [ '#6a26ff' ], [ '#bcfffe' ], [ '#ff6be5', '#b777ff', '#ff15f5', '#6a26ff', '#53a4ff' ], ],
-	[ [ '#470064' ], [ '#ecffc7' ], [ '#470064', '#001559', '#1e003f', '#1900e1', '#ecffc7' ], ],
+	[ [ '#470064' ], [ '#ecffc7' ], [ '#470064', '#001559', '#1e003f', '#1900e1', '#ecffc7' ], ], */
+
+	// 2021- ...:
+	[ [ '#f44d42' ], [ '#ffffff' ], [ '#002c9d', '#316bff', '#00164f', '#f44d42', '#ffc27a' ], ], // Blue & Reds
+	[ [ '#fff855' ], [ '#000000' ], [ '#ff9960', '#3e58e1', '#fffcb5', '#272727', '#f3d1be' ], ], // Oranges & Yellows
 ]
 
 const intro = (
@@ -46,10 +52,10 @@ const heuristics = [
 	<p>Good design has gravity. The more you work on it, the more gravity it gets. At some point, the pieces start falling into place on their own.</p>,
 	<p>The best design is invisible. It is functional to the point that you forget how it works, you just use it. You might even forget it took effort to invent once upon a time. Such it is: if you do things right, people won't know you've done anything at all. </p>,
 	<p>When working on difficult designs, it's important to believe that answers are out there, that finding them is a matter of time and effort rather than hope and random chance. Keep exploring until the fog lifts, and eventually answers will present themselves.</p>,
-	<p><a href="https://pages.wustl.edu/DC175/incomplete-manifesto-growth">Bruce Mau says</a>: begin anywhere. Depending on the complexity of the project, you might want to start with what is easiest or indeed what is hardest.</p>,
+	<p>Bruce Mau says: begin anywhere. Depending on the complexity of the project, you might want to start with what is easiest or indeed what is hardest.</p>,
 	<p>Talk alone does not move mountains. You can suggest moving the mountain is a priority. You can suggest that without a clear plan for moving the mountain, the project is never going to get off the ground. All of that may be true and agreed upon. But none of that is actually going to move the mountain. Sometimes you just have to grab a shovel and a wheelbarrow and start working.</p>,
 	<>
-		<p>Every <strong>thing</strong> around you is made by someone. Which means it can be made better still.</p>
+		<p>Every thing around you is made by someone. Which means it can be made better still.</p>
 		<p>It also means unless you're willing to make it better, it's likely going to stay the way it is.</p>
 	</>,
 	<>
@@ -122,7 +128,7 @@ const heuristics = [
  */
 
 function seed( number ) {
-	number += 1138;
+	number += 1329;
 	let seed = Math.sin( number ++ ) * 10000;
 	seed = seed - Math.floor( seed );
 	return seed;
@@ -224,13 +230,16 @@ function Quote( { currentHeuristic, heuristic } ) {
 function Sky( { className, currentHeuristic } ) {
 	// Output elements to transform.
 	let items = [];
-	let numItems = 10;
+	let numItems = 12; // Prev. 10 
 	let scaleMultiplier = 6;
+	const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+	let viewportMultiplier = vw / 1000;
+
 	for (var i = 1; i <= numItems; i++) {
 		let s1 = seed( seed( currentHeuristic ) * i );
 		let s2 = seed( seed( currentHeuristic ) * i + 1 );
 		let s3 = seed( seed( currentHeuristic ) * i + 2 );
-		let s4 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 10 );
+		let s4 = Math.round( seed( seed( currentHeuristic ) * i + 3 ) * 3 );
 		items.push(
 			<span key={ i } style={{
 				backgroundColor: getRandomColor( i + 1 * currentHeuristic, currentHeuristic),
@@ -240,7 +249,7 @@ function Sky( { className, currentHeuristic } ) {
 					'translate(-50%, -50%)'
 					+ 'translateZ(' + s4 + 'px)'
 					+ 'rotate(' + s2 * 360 + 'deg)'
-					+ 'scale(' + s3 * scaleMultiplier + ')',
+					+ 'scale(' + s3 * scaleMultiplier * viewportMultiplier + ')',
 				opacity: s1,
 			}} />
 		);
@@ -328,7 +337,7 @@ class HeuristicScene extends React.Component {
 		// Render.
 		return (
 			<>
-				<h1>Snacksized Personal Learnings, Served on a Turtle's Shell.</h1>
+				<h1>Turtleshell</h1>
 				<Navigation id={ id } currentHeuristic={ currentHeuristic } />
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } heuristic={ heuristic } />
