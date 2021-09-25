@@ -186,6 +186,7 @@ function Navigation( { currentHeuristic, id } ) {
 
 	return (
 		<>
+			<meta name="theme-color" content={ getRandomColor( 1 * currentHeuristic, currentHeuristic) } />
 			<ul className="heuristics__navigation">
 				<li className={ !id ? 'is-active is-home' : 'is-home' } ><Link to="/">Home</Link></li>
 				{heuristics.map((value, index) => {
