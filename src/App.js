@@ -20,24 +20,15 @@ const colorSchemes = [
 	// Second array are light colors.
 	// Third array are random colors.
 
-	// 2019-2021 colors:
-	/*[ [ '#aa3f00' ], [ '#faffc4' ], [ '#aa3f00', '#eb9b00', '#83006f', '#b30074', '#ffd32a' ], ],
-	[ [ '#2d7a00' ], [ '#efffc2' ], [ '#389c00', '#a8ab00', '#da4800', '#ffbc07', '#e3ff94' ], ],
-	[ [ '#ff9f60' ], [ '#00113c' ], [ '#ff9f60', '#fff923', '#ff9a03', '#4a3800', '#9afdff' ], ],
-	[ [ '#1115ff' ], [ '#fffab9' ], [ '#1115ff', '#1294ff', '#11ffd0', '#fffab9', '#008ec4' ], ],
-	[ [ '#6a26ff' ], [ '#bcfffe' ], [ '#ff6be5', '#b777ff', '#ff15f5', '#6a26ff', '#53a4ff' ], ],
-	[ [ '#470064' ], [ '#ecffc7' ], [ '#470064', '#001559', '#1e003f', '#1900e1', '#ecffc7' ], ], */
-
 	// 2021- ...:
-	[ [ '#f44d42' ], [ '#ffffff' ], [ '#002c9d', '#316bff', '#00164f', '#f44d42', '#ffc27a' ], ], // Blue & Reds
-	[ [ '#fff855' ], [ '#000000' ], [ '#ff9960', '#3e58e1', '#fffcb5', '#272727', '#f3d1be' ], ], // Oranges & Yellows
+	[ [ 'var(--a--dark)' ], [ 'var(--a--light)' ], [ 'var(--a--a)', 'var(--a--b)', 'var(--a--c)', 'var(--a--d)', 'var(--a--e)' ], ],
+	[ [ 'var(--b--dark)' ], [ 'var(--b--light)' ], [ 'var(--b--a)', 'var(--b--b)', 'var(--b--c)', 'var(--b--d)', 'var(--b--e)' ], ],
 ]
 
 const intro = (
 	<>
-		<p><strong>Hello!</strong> This is where I collect personal learnings, or traits I aspire to absorb.</p>
-		<p>They are shared publicly (and <a href="https://github.com/jasmussen/turtleshell">open source</a>) so that they might help or inspire others to create their own set of principles.</p>
-		<p>No advice applies universally, so take what works and leave the rest!</p>
+		<h1>Advice to My Younger Self</h1>
+		<p>A collection of learnings and aspirations I wish I had known years ago. Shared <a href="https://github.com/jasmussen/turtleshell">publicly</a> in case they might be useful to you.</p>
 		<p>— <a href="http://moc.co">Joen</a>, October 2019</p>
 	</>
 );
@@ -184,9 +175,13 @@ function Navigation( { currentHeuristic, id } ) {
 		next = "";
 	}
 
+	// Parse the CSS variable.
+	let themeColorProp = getRandomColor( 1 * currentHeuristic, currentHeuristic).replace('var(', '').replace(')', '');
+	let themeColor = getComputedStyle(document.documentElement).getPropertyValue( themeColorProp );
+
 	return (
 		<>
-			<meta name="theme-color" content={ getRandomColor( 1 * currentHeuristic, currentHeuristic) } />
+			<meta name="theme-color" content={ themeColor } />
 			<ul className="heuristics__navigation">
 				<li className={ !id ? 'is-active is-home' : 'is-home' } ><Link to="/">Home</Link></li>
 				{heuristics.map((value, index) => {
@@ -338,7 +333,6 @@ class HeuristicScene extends React.Component {
 		// Render.
 		return (
 			<>
-				<h1>Turtleshell</h1>
 				<Navigation id={ id } currentHeuristic={ currentHeuristic } />
 				<h2>{ currentHeuristic === 0 ? '' : currentHeuristic }</h2>
 				<Quote currentHeuristic={ currentHeuristic } heuristic={ heuristic } />
